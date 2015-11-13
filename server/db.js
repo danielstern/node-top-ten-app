@@ -9,7 +9,7 @@ mongoose.connect(`mongodb://localhost/topten`,()=>{
 	mongoose.connection.db.dropDatabase();
 	
 	let list = new TopTenList({name:`Favorite Songs`}).save();
-	let user = new User();
+	let user = new User({username:"guest",password:"test"});
 	
 	let initialItems = [1,2,3,4,5,6,7,8,9,10]
 		.map((n)=>{return {name:`Item ${n}`, rank:n, list:list._id}});
