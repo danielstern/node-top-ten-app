@@ -1,5 +1,5 @@
+"use strict";
 module.exports = function(app){
-	/* Authentication */
 	let passport = require('passport');
 	let LocalStrategy = require('passport-local');
 	passport.use(new LocalStrategy({
