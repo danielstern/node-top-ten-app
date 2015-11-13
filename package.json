@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "bower": "^1.6.5",
     "gulp": "^3.9.0"
   },
   "dependencies": {

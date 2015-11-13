@@ -1,0 +1,20 @@
+{
+  "name": "php-node",
+  "version": "0.0.0",
+  "homepage": "https://github.com/danielstern/node-top-ten-app",
+  "authors": [
+    "Code Whisperer <daniel@danielstern.ca>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "react": "~0.14.2"
+  }
+}
