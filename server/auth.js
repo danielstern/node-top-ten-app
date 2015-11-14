@@ -5,10 +5,7 @@ let LocalStrategy = require('passport-local');
 module.exports = function(app){
 	
 	let local = new LocalStrategy(function(username, password, done) {
-		console.log("Attempt local strat...",username,password);
-		//throw new Error("!!!!");
 		User.findOne({ username: username }, function (err, user) {
-			console.log("Found..?",user);
 			if (err) { return done(err); }
 			if (!user) { return done(null, false); }
 			if (user.password != password) { return done(null, false); }
@@ -19,16 +16,13 @@ module.exports = function(app){
 	passport.use(local);
 
 	app.post('/login', function(req, res, next) {
-
 		passport.authenticate('local', function(err, user, info) {
 			if (err) { return next(err); }
 			if (!user) {
-				console.log("error no user");
 				res.status(404).send();
-
 			};
 			if (user) {
-				res.status(200).send();
+				res.status(200).send(user);
 			}
 		})(req, res, next);
 	});
