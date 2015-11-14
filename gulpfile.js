@@ -8,7 +8,9 @@ gulp.task('bundle',function(){
 		entries:'app/main.js',
 		debug:true,
 	})
-	.transform(babelify)
+	.transform(babelify.configure({
+	  presets: ["es2015", "react"]
+	}))
 	.bundle()
 	.pipe(source('app.js'))
 	.pipe(gulp.dest('./app'));

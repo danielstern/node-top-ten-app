@@ -19,31 +19,30 @@ module.exports = function(app){
 	passport.use(local);
 
 	app.post('/login', function(req, res, next) {
-	  console.log("Login");
-	  passport.authenticate('local', function(err, user, info) {
-		console.log("Authenticate good",err,user,info);
-		if (err) { return next(err); }
-		if (!user) { 
-			console.log("error no user");
-			res.status(404).send();
-			//return res.redirect('/login'); 
-		};
-		if (user) {
-			res.status(200).send();
-		}
-	  })(req, res, next);
+
+		passport.authenticate('local', function(err, user, info) {
+			if (err) { return next(err); }
+			if (!user) {
+				console.log("error no user");
+				res.status(404).send();
+
+			};
+			if (user) {
+				res.status(200).send();
+			}
+		})(req, res, next);
 	});
 
-//	passport.serializeUser(function(user, cb) {
-//	  cb(null, user.id);
-//	});
-//
-//	passport.deserializeUser(function(id, cb) {
-//	  User.findById(id, function (err, user) {
-//		if (err) { return cb(err); }
-//		cb(null, user);
-//	  });
-//	});
+	passport.serializeUser(function(user, cb) {
+	  cb(null, user.id);
+	});
+
+	passport.deserializeUser(function(id, cb) {
+	  User.findById(id, function (err, user) {
+		if (err) { return cb(err); }
+		cb(null, user);
+	  });
+	});
 
 	app.use(passport.initialize());
 	app.use(passport.session());
