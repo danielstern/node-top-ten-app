@@ -7,5 +7,11 @@ module.exports = {
 			type:"user:login",
 			payload:user
 		})
+	},
+	logout:function(user){
+		dispatcher.dispatch({
+			type:"user:logout",
+			payload:user
+		})
 	}
 }

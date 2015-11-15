@@ -8,17 +8,10 @@ let TopTenList = require('./models/TopTenList.js');
 let User = require('./models/User.js');
 
 app.use(express.static('app'));
-//app.use(require('morgan')('combined'));
 app.use(require('cookie-parser')());
 app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(require('express-session')({ secret: 'top secret key', resave: false, saveUninitialized: false }));
 let passport = require('./auth.js')(app);
-
-// no static?
-/* app.get('/', function(req, res) {
-    res.render('index');
-});*/
-
 
 app.route(`/api/items`)
 .get((req,res)=>{
@@ -32,39 +25,44 @@ app.route(`/api/items`)
 	}
 
 });
-app.route(`/api/lists`)
+app.route(`/api/list`)
 .get((req,res)=>{
 	TopTenList.find(function(error, doc){
+		console.log("Getting lists...",req.user);
 		res.send(doc);
 	});
 })
+
+app.route('/api/user')
+.get(function(req, res, next) {
+	if (req.isAuthenticated()){
+		res.header("Access-Control-Allow-Credentials", "true");
+		res.status(200).json(req.user);
+	} else {
+		res.status(400).send(null);
+	}
+ });
 
 app.route('/login')
 .post(function(req, res, next) {
 	passport.authenticate('local', function(err, user, info) {
 		if (err) { return next(err); }
 		if (!user) {
-			res.status(404).send();
+			res.status(400).send();
 		};
 		if (user) {
-			console.log("Successfully authenticated user.")	;
-			res.header("Access-Control-Allow-Credentials", "true");
 			req.login(user,function(err){
-				res.status(200).send(user);
-				next(user);
+				res.status(200).json(user);
 			});
 		}
 	})(req, res, next);
 });
 
-//app.route('/api/user')
-//.get(function(req, res, next) {
-//	if (req.isAuthenticated()){
-//		res.header("Access-Control-Allow-Credentials", "true");
-//		res.status(200).json(req.user);
-//	} else {
-//		res.status(202).send(null);
-//	}
-// });
+app.route('/logout')
+.post(function(req, res, next) {
+	req.logout();
+	res.status(200).send();
+});
+
 
 app.listen(port,()=>{console.log(`App listening on port ${port}.`)});
