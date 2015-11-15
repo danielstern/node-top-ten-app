@@ -5,6 +5,9 @@ module.exports = {
 		return new Promise(function(success,error){
 			$.ajax({
 				url:url,
+				xhrFields: {
+				   withCredentials: true
+				},
 				dataType:"json",
 				success,
 				error
@@ -25,6 +28,9 @@ module.exports = {
 		return new Promise(function(success,error){
 			$.ajax({
 				url,
+				xhrFields: {
+				   withCredentials: true
+				},
 				type:'POST',
 				data,
 				success,

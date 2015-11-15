@@ -3,6 +3,7 @@ let React = require('react');
 let ReactDOM = require('react-dom');
 let $ = require('jquery');
 let post = require('./restHelper.js').post;
+let get = require('./restHelper.js').get;
 
 //$.ajax({
 //	url:'/login',
@@ -15,10 +16,10 @@ let post = require('./restHelper.js').post;
 let LoginForm = React.createClass({
 	handleLogin(e){
 		e.preventDefault();
-		console.log("Logging in?",this.state);
 		post('/login',this.state)
 		.then(function(g){
 			console.log("Logged in?",g);
+
 		})
 	},
 	getInitialState(){
@@ -57,5 +58,10 @@ let TopTenList = React.createClass({
 })
 
 ReactDOM.render(<TopTenList />, appMount);
+
+get('api/items')
+.then(function(f){
+	console.log(f);
+})
 
 console.info("App init");

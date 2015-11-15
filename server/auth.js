@@ -13,19 +13,15 @@ module.exports = function(app){
 		});
 	});
 	
+//	var isAuthenticated = function (req, res, next) {
+//		if (req.isAuthenticated()) {
+//			return next();
+//		}
+//	  	//res.redirect('/');
+//	}
 	passport.use(local);
 
-	app.post('/login', function(req, res, next) {
-		passport.authenticate('local', function(err, user, info) {
-			if (err) { return next(err); }
-			if (!user) {
-				res.status(404).send();
-			};
-			if (user) {
-				res.status(200).send(user);
-			}
-		})(req, res, next);
-	});
+
 
 	passport.serializeUser(function(user, cb) {
 	  cb(null, user.id);
@@ -40,4 +36,6 @@ module.exports = function(app){
 
 	app.use(passport.initialize());
 	app.use(passport.session());
+
+	return passport;
 }
