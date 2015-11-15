@@ -57,4 +57,14 @@ app.route('/login')
 	})(req, res, next);
 });
 
+//app.route('/api/user')
+//.get(function(req, res, next) {
+//	if (req.isAuthenticated()){
+//		res.header("Access-Control-Allow-Credentials", "true");
+//		res.status(200).json(req.user);
+//	} else {
+//		res.status(202).send(null);
+//	}
+// });
+
 app.listen(port,()=>{console.log(`App listening on port ${port}.`)});

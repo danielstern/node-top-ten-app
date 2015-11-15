@@ -4,15 +4,16 @@ let {get,post,del,patch} = require("./../RestHelper.js");
 
 function UserStore(){
 
-	let currentUser = null;
+	let user = null;
+	let changeListeners = [];
 
 	function triggerListeners(){
 		changeListeners.forEach(function(listener){
-			listener(currentUser)	;
+			listener(user)	;
 		})
 	};
 
-	get("api/user")
+	get('api/user')
 	.then((data)=>{
 		user = data;
 		triggerListeners();
@@ -25,6 +26,7 @@ function UserStore(){
 	}
 
 	function login(_user){
+		console.info("Logging user in", _user);
 		user = _user;
 		triggerListeners();
 	}

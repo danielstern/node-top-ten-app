@@ -4,7 +4,8 @@ let ReactDOM = require('react-dom');
 let $ = require('jquery');
 let post = require('./restHelper.js').post;
 let get = require('./restHelper.js').get;
-
+let userActions = require('./actions/userActionCreator.js');
+let userStore = require('./stores/userStore.js');
 
 let LoginForm = React.createClass({
 	handleLogin(e){
@@ -12,7 +13,9 @@ let LoginForm = React.createClass({
 		post('/login',this.state)
 		.then(function(g){
 			console.log("Logged in?",g);
-
+			if (g) {
+				userActions.login(g);
+			}
 		})
 	},
 	getInitialState(){
@@ -31,7 +34,7 @@ let LoginForm = React.createClass({
 		return (
 			<form className="auth" onSubmit={this.handleLogin}>
 				<h3>Please sign in to see your top ten list</h3>
-				<input type="text" placeholder="Username" value={this.state.username} onChange={this.handleNameChange}/>
+				<input type="text" autoFocus="true" placeholder="Username" value={this.state.username} onChange={this.handleNameChange}/>
 				<input type="password" placeholder="Password" value={this.state.password} onChange={this.handlePasswordChange}/>
 				<input type="submit" value="Log In" />
 			</form>
@@ -40,6 +43,14 @@ let LoginForm = React.createClass({
 })
 
 let TopTenList = React.createClass({
+	getDefaultProps(){
+		return {
+			user:null
+		}
+	},
+	componentDidMount(){
+
+	},
 	render(){
 		if (this.props.user) {
 
@@ -53,7 +64,18 @@ let TopTenList = React.createClass({
 	}
 })
 
-ReactDOM.render(<TopTenList />, appMount);
+let user = userStore.getUser();
+
+userStore.onChange((_user)=>{
+	user = _user;
+	render();
+});
+
+function render(){
+	ReactDOM.render(<TopTenList user={user} />, appMount);
+}
+render();
+
 
 get('api/items')
 .then(function(f){
