@@ -5,13 +5,6 @@ let $ = require('jquery');
 let post = require('./restHelper.js').post;
 let get = require('./restHelper.js').get;
 
-//$.ajax({
-//	url:'/login',
-//	type:'POST',
-//	data:{username:'guest',password:'test'},
-//	success:a=>console.log(a),
-//	error:z=>console.warn(z)
-//});
 
 let LoginForm = React.createClass({
 	handleLogin(e){
@@ -48,10 +41,13 @@ let LoginForm = React.createClass({
 
 let TopTenList = React.createClass({
 	render(){
+		if (this.props.user) {
+
+		}
 		return (
 			<div>
 				<h1>My Top Ten List</h1>
-				<LoginForm />
+				{this.props.user ? "Thanks for logging in" : <LoginForm />}
 			</div>
 		)
 	}
