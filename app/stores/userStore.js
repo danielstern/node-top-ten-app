@@ -35,7 +35,7 @@ function UserStore(){
 		changeListeners.push(listener);
 	}
 
-	dispatcher.register(function(event){
+	this.token = dispatcher.register(function(event){
 		let [category,type] = event.type.split(':');
 		if (category ==='user'){
 			switch(type) {

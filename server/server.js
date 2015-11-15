@@ -27,9 +27,22 @@ app.route(`/api/items`)
 });
 app.route(`/api/list`)
 .get((req,res)=>{
-	TopTenList.find(function(error, doc){
-		console.log("Getting lists...",req.user);
-		res.send(doc);
+	if (!req.user) {
+		res.status(400).send()
+		return;
+	}
+	TopTenList.findOne({ owner : req.user._id },function(error, list){
+		console.log("Finding matching lists...",req.user,list);
+		if (!list) {
+			return res.status(500).send();
+		}
+		TopTenListItem.find({ list : list._id },function(error, doc){
+			list.items = doc;
+			res.send(list);
+		});
+//		doc.map(function(a){
+//
+//		});
 	});
 })
 
