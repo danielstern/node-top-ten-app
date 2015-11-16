@@ -91,10 +91,7 @@ app.get('/',function(req,res){
 			});
 		});
 	} else {
-		var generated = React.renderToString(app({
-			items:{items:[]},
-			user:null
-		}));
+		var generated = React.renderToString(app());
 		res.render('./../app/index.ejs',{reactOutput:generated});
 	}
 })

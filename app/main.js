@@ -28,6 +28,6 @@ userStore.onChange((_user)=>{
 
 function render(){
 	console.log("Render:",list, user);
-	ReactDOM.render(<TopTenList user={user} items={list.items} />, appMount);
+	ReactDOM.render(<TopTenList user={user} items={list.items} name={list.name}/>, appMount);
 }
 render();

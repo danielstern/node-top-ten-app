@@ -11,10 +11,11 @@ module.exports = React.createClass({
 		});
 	},
 	render(){
+		//console.log("Props?",this.props);
 		return (
 			<form className="auth" onSubmit={this.handleLogout}>
-				<h3>Logout</h3>
-				<input type="submit" value="Log Out" />
+				<h3>Welcome, {this.props.user.username}</h3>
+				<input type="submit" value="Log Out?" />
 			</form>
 		)
 	}

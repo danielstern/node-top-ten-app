@@ -16,7 +16,7 @@ module.exports = React.createClass({
 	},
 	getInitialState(){
 		return {
-			username:"guest",
+			username:"Guest",
 			password:"test"
 		}
 	},
