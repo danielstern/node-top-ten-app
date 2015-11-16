@@ -7,6 +7,7 @@ let TopTenListItem = require('./models/TopTenListItem.js');
 let TopTenList = require('./models/TopTenList.js');
 let User = require('./models/User.js');
 let React = require('React');
+var ReactDOMServer = require('react-dom/server');
 require('babel-core/register');
 
 app.use(express.static('app'));
@@ -82,16 +83,16 @@ app.get('/',function(req,res){
 	if (req.isAuthenticated()) {
 		TopTenList.findOne({ owner : req.user._id },function(error, list){
 			TopTenListItem.find({ list : list._id },function(error, items){
-				//console.log("Items?")
-				var generated = React.renderToString(app({
-					list:{items},
-					user:req.user
+				var generated = ReactDOMServer.renderToString(app({
+					list:{items:items},
+					user:req.user,
+					name:list.name
 				}));
 				res.render('./../app/index.ejs',{reactOutput:generated});	
 			});
 		});
 	} else {
-		var generated = React.renderToString(app());
+		var generated = ReactDOMServer.renderToString(app());
 		res.render('./../app/index.ejs',{reactOutput:generated});
 	}
 })

@@ -12,7 +12,6 @@ new User({username:"Guest",password:"test"}).save()
 	.map((n)=>{return {name:`Favorite Thing #${n}`, link:"http://oreilly.com", rank:n, list:list._id}})
 	.forEach(function(item){
 		let instance = new TopTenListItem(item)
-		console.log("Created item...",instance);
 		instance.save();
 	});
 });

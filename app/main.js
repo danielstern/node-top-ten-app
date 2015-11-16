@@ -26,8 +26,13 @@ userStore.onChange((_user)=>{
 
 });
 
-function render(){
+function render(/*forceRender*/){
 	console.log("Render:",list, user);
-	ReactDOM.render(<TopTenList user={user} items={list.items} name={list.name}/>, appMount);
+	//if (forceRender || (user && list.items.length > 0)) {
+	if (!user || (user && list.items.length)) {
+		ReactDOM.render(<TopTenList user={user} items={list.items} name={list.name}/>, appMount);
+	}
+
+	//}
 }
 render();
