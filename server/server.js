@@ -36,9 +36,13 @@ app.route(`/api/list`)
 		if (!list) {
 			return res.status(500).send();
 		}
-		TopTenListItem.find({ list : list._id },function(error, doc){
-			list.items = doc;
-			res.send(list);
+		TopTenListItem.find({ list : list._id },function(error, items){
+			//console.log("Found list items....",doc);
+			
+			res.send({
+				name:list.name,
+				items: items
+			});
 		});
 //		doc.map(function(a){
 //
