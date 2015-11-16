@@ -1,3 +1,5 @@
+"use strict";
+
 let React = require('react');
 let LoginForm = require('./LoginForm.js');
 let LogoutForm = require('./LogoutForm.js');

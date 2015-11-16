@@ -10,12 +10,12 @@ let listStore = require('./stores/listStore.js');
 
 let TopTenList = require('./components/TopTenList.js');
 
-
-
 let list = {items:[]};
 listStore.onChange(function(_list){
 	list = _list;
-	render();
+	if (_list) {
+		render();	
+	}
 });
 
 let user = userStore.getUser();

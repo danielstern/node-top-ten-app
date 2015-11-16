@@ -6,6 +6,8 @@ let app = new express();
 let TopTenListItem = require('./models/TopTenListItem.js');
 let TopTenList = require('./models/TopTenList.js');
 let User = require('./models/User.js');
+let React = require('React');
+require('babel-core/register');
 
 app.use(express.static('app'));
 app.use(require('cookie-parser')());
@@ -32,21 +34,15 @@ app.route(`/api/list`)
 		return;
 	}
 	TopTenList.findOne({ owner : req.user._id },function(error, list){
-		console.log("Finding matching lists...",req.user,list);
 		if (!list) {
 			return res.status(500).send();
 		}
-		TopTenListItem.find({ list : list._id },function(error, items){
-			//console.log("Found list items....",doc);
-			
+		TopTenListItem.find({ list : list._id },function(error, items){			
 			res.send({
 				name:list.name,
 				items: items
 			});
 		});
-//		doc.map(function(a){
-//
-//		});
 	});
 })
 
@@ -81,5 +77,21 @@ app.route('/logout')
 	res.status(200).send();
 });
 
+app.get('/',function(req,res){
+	if (req.isAuthenticated()) {
+		let app = React.createFactory(require('./../app/components/TopTenList.js'));
+		TopTenList.findOne({ owner : req.user._id },function(error, list){
+			TopTenListItem.find({ list : list._id },function(error, items){			
+				var generated = React.renderToString(app({
+					items,
+					user:req.user
+				}));
+				res.render('./../app/index.ejs',{reactOutput:generated});	
+			});
+		});
+	} else {
+		res.render('./../app/index.ejs',{reactOutput:''});
+	}
+})
 
 app.listen(port,()=>{console.log(`App listening on port ${port}.`)});
