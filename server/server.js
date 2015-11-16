@@ -78,19 +78,24 @@ app.route('/logout')
 });
 
 app.get('/',function(req,res){
+	let app = React.createFactory(require('./../app/components/TopTenList.js'));
 	if (req.isAuthenticated()) {
-		let app = React.createFactory(require('./../app/components/TopTenList.js'));
 		TopTenList.findOne({ owner : req.user._id },function(error, list){
-			TopTenListItem.find({ list : list._id },function(error, items){			
+			TopTenListItem.find({ list : list._id },function(error, items){
+				//console.log("Items?")
 				var generated = React.renderToString(app({
-					items,
+					list:{items},
 					user:req.user
 				}));
 				res.render('./../app/index.ejs',{reactOutput:generated});	
 			});
 		});
 	} else {
-		res.render('./../app/index.ejs',{reactOutput:''});
+		var generated = React.renderToString(app({
+			items:{items:[]},
+			user:null
+		}));
+		res.render('./../app/index.ejs',{reactOutput:generated});
 	}
 })
 

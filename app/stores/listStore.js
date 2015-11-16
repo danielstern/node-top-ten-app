@@ -18,10 +18,12 @@ function ListStore(){
 		if (u){
 			get('api/list/')
 			.then((data)=>{
-				console.log("Got lists,",data);
 				lists = data;
 				triggerListeners();
 			});		
+		} else {
+			lists = {items:[]};
+			triggerListeners();
 		}
 	})
 	

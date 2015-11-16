@@ -26,7 +26,6 @@ function UserStore(){
 	}
 
 	function login(_user){
-		console.info("Logging user in", _user);
 		user = _user;
 		triggerListeners();
 	}
