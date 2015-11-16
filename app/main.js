@@ -13,9 +13,7 @@ let TopTenList = require('./components/TopTenList.js');
 let list = {items:[]};
 listStore.onChange(function(_list){
 	list = _list;
-	if (_list) {
-		render();	
-	}
+	render();
 });
 
 let user = userStore.getUser();
@@ -25,10 +23,11 @@ userStore.onChange((_user)=>{
 		list = {items:[]};		
 	}
 	render();
+
 });
 
 function render(){
-	console.log("lists?",list);
-	ReactDOM.render(<TopTenList user={user} list={list} />, appMount);
+	console.log("Render:",list, user);
+	ReactDOM.render(<TopTenList user={user} items={list.items} />, appMount);
 }
 render();

@@ -8,17 +8,16 @@ module.exports = React.createClass({
 	getDefaultProps(){
 		return {
 			user:null,
-			list:{
-				items:[],
-			}
+			items:[]
 		}
 	},
 	render(){
+		console.log("Props?",this.props);
 		return (
 			<div>
 				<h1>My Top Ten List</h1>
 				{this.props.user ? <LogoutForm /> : <LoginForm />}
-				{this.props.list.items.map((item, index)=>{
+				{this.props.items.map((item, index)=>{
 					return (
 						<div key={"key-"+index}>
 							{item.name}
