@@ -17,7 +17,7 @@ function UserStore(){
 	.then((data)=>{
 		user = data;
 		triggerListeners();
-	});
+	},(e)=>{console.info("not logged in.")});
 
 
 	function logout(){

@@ -56,7 +56,7 @@ app.route('/api/user')
 		res.header("Access-Control-Allow-Credentials", "true");
 		res.status(200).json(req.user);
 	} else {
-		res.status(400).send(null);
+		res.status(201).send(null);
 	}
  });
 
@@ -65,7 +65,7 @@ app.route('/login')
 	passport.authenticate('local', function(err, user, info) {
 		if (err) { return next(err); }
 		if (!user) {
-			res.status(400).send();
+			res.status(201).send();
 		};
 		if (user) {
 			req.login(user,function(err){

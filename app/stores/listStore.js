@@ -1,6 +1,7 @@
 "use strict";
 let dispatcher = require("./../dispatcher.js");
 let {get,post,del,patch} = require("./../RestHelper.js");
+let userStore = require('./userStore.js');
 
 function ListStore(){
 
@@ -12,13 +13,18 @@ function ListStore(){
 			listener(lists)	;
 		})
 	};
-
-	get('api/list/')
-	.then((data)=>{
-		console.log("Got lists,",data);
-		lists = data;
-		triggerListeners();
-	});
+	
+	userStore.onChange((u)=>{
+		if (u){
+			get('api/list/')
+			.then((data)=>{
+				console.log("Got lists,",data);
+				lists = data;
+				triggerListeners();
+			});		
+		}
+	})
+	
 
 	function onChange(listener){
 		changeListeners.push(listener);
