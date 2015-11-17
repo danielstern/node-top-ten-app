@@ -5,7 +5,7 @@ let TopTenListItem = require('./models/TopTenListItem.js');
 
 new User({username:"Guest",password:"test"}).save()
 .then(function(user){
-	return new TopTenList({name:`Favorite Songs`,owner: user._id}).save()
+	return new TopTenList({name:`My Favorite Songs`,owner: user._id}).save()
 })
 .then(function(list){
 	let initialItems = [1,2,3,4,5,6,7,8,9,10]
@@ -15,7 +15,3 @@ new User({username:"Guest",password:"test"}).save()
 		instance.save();
 	});
 });
-
-
-
-console.info("Populating database");

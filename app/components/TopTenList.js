@@ -21,7 +21,7 @@ module.exports = React.createClass({
 				{this.props.items.map((item, index)=>{
 					return (
 						<div key={"key-"+index}>
-							{item.name}
+							<a href={item.link}><h3>{item.name}</h3></a>
 						</div>
 					)
 				})}				

@@ -96,4 +96,6 @@ app.get('/',function(req,res){
 	}
 })
 
+app.use('/bower_components',  express.static('./bower_components'));
+
 app.listen(port,()=>{console.log(`App listening on port ${port}.`)});
