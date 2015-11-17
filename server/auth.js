@@ -13,12 +13,6 @@ module.exports = function(app){
 		});
 	});
 	
-//	var isAuthenticated = function (req, res, next) {
-//		if (req.isAuthenticated()) {
-//			return next();
-//		}
-//	  	//res.redirect('/');
-//	}
 	passport.use(local);
 
 

@@ -9,7 +9,7 @@ new User({username:"Guest",password:"test"}).save()
 })
 .then(function(list){
 	let initialItems = [1,2,3,4,5,6,7,8,9,10]
-	.map((n)=>{return {name:`Favorite Thing #${n}`, link:"http://oreilly.com", rank:n, list:list._id}})
+	.map((n)=>{return {name:`Favorite Song #${n}`, link:"http://oreilly.com", rank:n, list:list._id}})
 	.forEach(function(item){
 		let instance = new TopTenListItem(item)
 		instance.save();

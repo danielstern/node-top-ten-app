@@ -18,7 +18,6 @@ let passport = require('./auth.js')(app);
 
 app.route(`/api/items`)
 .get((req,res)=>{
-	console.log("Get items...",req.isAuthenticated());
 	if (req.isAuthenticated()) {
 		TopTenListItem.find(function(error, doc){
 			res.send(doc);

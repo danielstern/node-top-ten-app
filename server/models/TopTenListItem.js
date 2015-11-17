@@ -6,9 +6,8 @@ module.exports = mongoose.model(`TopTenListItem`,{
 	rank:Number,
 	description:String,
 	link:String,
-	/*list:{
+	list:{
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'TopTenList'
-	}*/
-	list:mongoose.Schema.ObjectId
+	}
 });			   

@@ -11,7 +11,6 @@ module.exports = React.createClass({
 		});
 	},
 	render(){
-		//console.log("Props?",this.props);
 		return (
 			<form className="auth" onSubmit={this.handleLogout}>
 				<h3>Welcome, {this.props.user.username}</h3>
