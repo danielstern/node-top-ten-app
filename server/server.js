@@ -1,5 +1,6 @@
 "use strict";
-const port = 7777;
+//const port = 7777;
+var port = process.env.PORT || 7777;
 let db = require('./db.js');
 let express = require('express');
 let app = new express();
