@@ -1,6 +1,6 @@
 "use strict";
 let dispatcher = require("./../dispatcher.js");
-let {get,post,del,patch} = require("./../RestHelper.js");
+let {get,post,del,patch} = require("./../restHelper.js");
 
 function UserStore(){
 
