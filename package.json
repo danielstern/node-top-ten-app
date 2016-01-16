@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "gulp serve"
+    "start": "gulp serve",
+	"postinstall": "bower install"
   },
   "author": "",
   "license": "ISC",
