@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "gulp serve",
-	"postinstall": "./node_modules/bower/bin/bower install"
+    "start": "gulp serve"
   },
   "author": "",
   "license": "ISC",
