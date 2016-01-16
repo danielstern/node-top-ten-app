@@ -2,6 +2,9 @@
   "name": "php-to-node",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": "4.1.1"
+  },
   "main": "index.js",
   "scripts": {
     "test": "jest",
@@ -41,6 +44,7 @@
     "babel-preset-react": "^6.1.18",
     "body-parser": "^1.14.1",
     "browserify": "^12.0.1",
+	"bower": "^1.6.5",
     "cookie-parser": "^1.4.0",
     "ejs": "^2.3.4",
     "express": "^4.13.3",
