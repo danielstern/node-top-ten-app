@@ -6,7 +6,7 @@ let app = new express();
 let TopTenListItem = require('./models/TopTenListItem.js');
 let TopTenList = require('./models/TopTenList.js');
 let User = require('./models/User.js');
-let React = require('React');
+let React = require('react');
 var ReactDOMServer = require('react-dom/server');
 require('babel-core/register');
 
